@@ -1,40 +1,28 @@
+export type ApplicationFrequency = 'Daily' | 'Weekly' | 'Monthly' | 'Rarely';
 
-export interface Question {
-  id: string;
-  text: string;
+export type View = 'home' | 'quest' | 'tailor';
+
+export interface SurveyResponse {
+  frustration: string;
+  applicationFrequency: ApplicationFrequency;
+  wantsConciergeDemo: boolean;
+  email: string;
+  jobDescription: string;
 }
-
-export interface TailoredResume {
-  id: string;
-  jobTitle: string;
-  createdAt: string;
-  docxPath: string; // Will now be a data URI for client-side download
-  pdfPath: string; // Will now be a data URI for client-side download
-  docxFilename?: string;
-  pdfFilename?: string;
-}
-
-// --- Gamification Types ---
-
-export interface UserProfile {
-  level: number;
-  xp: number;
-  xpToNextLevel: number;
-  name: string;
-}
+// FIX: Added Quest-related types to resolve errors in QuestView.tsx
+export type QuestNodeStatus = 'locked' | 'pending' | 'completed';
 
 export interface QuestNode {
   id: string;
   title: string;
   question: string;
-  status: 'locked' | 'pending' | 'completed';
-  xp: number;
-  answer?: string;
+  answer: string | null;
+  status: QuestNodeStatus;
 }
 
 export interface QuestZone {
   id: string;
   name: string;
-  nodes: QuestNode[];
   isUnlocked: boolean;
+  nodes: QuestNode[];
 }
